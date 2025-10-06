@@ -13,7 +13,7 @@ public class PlatformController : MonoBehaviour
     void Start()
     {
         // Find the one and only GameState object in the scene.
-        gameState = FindObjectOfType<GameState>();
+        gameState = FindFirstObjectByType<GameState>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         platformCollider = GetComponent<Collider2D>();
 
