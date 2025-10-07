@@ -31,8 +31,11 @@ public class ArchitectController : NetworkBehaviour
         {
             if (Input.GetKeyDown(keyCodes[i]))
             {
-                playerAudio.PlaySoundServerRpc(i);
-                TogglePlatformServerRpc(i);
+                if (i < gameState.platformStates.Count && gameState.platformStates[i] <= 0)
+                {
+                    playerAudio.PlaySoundServerRpc(i);
+                    TogglePlatformServerRpc(i);
+                }
             }
         }
     }
