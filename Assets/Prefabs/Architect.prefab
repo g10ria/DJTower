@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArchitectController
   ShowTopMostFoldoutHeaderGroup: 1
+  bufferTime: 0.2
 --- !u!82 &-7673309136962646017
 AudioSource:
   m_ObjectHideFlags: 0

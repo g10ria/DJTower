@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ArchitectController : NetworkBehaviour
 {
+    public float bufferTime; // Small buffer to ensure platform stays active for the duration of the sound
     private GameState gameState;
     private PlayerAudio playerAudio;
 
@@ -43,8 +44,9 @@ public class ArchitectController : NetworkBehaviour
         // This code ONLY runs on the server.
         if (platformId < gameState.platformStates.Count)
         {
+            float audioLength = playerAudio.GetAudioLength(platformId);
             // The server changes the value in the synchronized list.
-            gameState.platformStates[platformId] = !gameState.platformStates[platformId];
+            gameState.platformStates[platformId] = audioLength+bufferTime;
             // Netcode will automatically send this change to all clients!
         }
     }

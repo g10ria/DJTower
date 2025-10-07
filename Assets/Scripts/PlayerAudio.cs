@@ -15,6 +15,15 @@ public class PlayerAudio : NetworkBehaviour
         // Get the AudioSource component attached to this GameObject.
         audioSource = GetComponent<AudioSource>();
     }
+
+
+    public float GetAudioLength(int platformId)
+    {
+        if (platformId >= 0 && platformId < clips.Length)
+            return clips[platformId].length;
+        return 0f;
+    }
+
     // This is a Server Remote Procedure Call.
     // It is CALLED by a client, but EXECUTED on the server.
     [ServerRpc]
