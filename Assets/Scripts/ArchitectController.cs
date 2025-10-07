@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class ArchitectController : NetworkBehaviour
 {
+    public float bufferTime; // Small buffer to ensure platform stays active for the duration of the sound
     private GameState gameState;
+    private PlayerAudio playerAudio;
 
     public override void OnNetworkSpawn()
     {
@@ -11,7 +13,8 @@ public class ArchitectController : NetworkBehaviour
         if (!IsOwner) return;
 
         // Find the GameState once we're in the game.
-        gameState = FindObjectOfType<GameState>();
+        gameState = FindFirstObjectByType<GameState>();
+        playerAudio = GetComponent<PlayerAudio>();
     }
 
     void Update()
@@ -19,16 +22,22 @@ public class ArchitectController : NetworkBehaviour
         // Again, only the owner can give input.
         if (!IsOwner || gameState == null) return;
 
-        // Example Input: Press '1' to toggle platform 0, '2' for platform 1, etc.
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            TogglePlatformServerRpc(0); // Request to toggle platform 0
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            TogglePlatformServerRpc(1); // Request to toggle platform 1
-        }
+        KeyCode[] keyCodes = {KeyCode.Alpha1,KeyCode.Alpha2,KeyCode.Alpha3, KeyCode.Alpha4,
+        KeyCode.Q, KeyCode.W, KeyCode.E, KeyCode.R,
+        KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F,
+        KeyCode.Z, KeyCode.X, KeyCode.C, KeyCode.V };
 
+        for (int i = 0; i < keyCodes.Length; i++)
+        {
+            if (Input.GetKeyDown(keyCodes[i]))
+            {
+                if (i < gameState.platformStates.Count && gameState.platformStates[i] <= 0)
+                {
+                    playerAudio.PlaySoundServerRpc(i);
+                    TogglePlatformServerRpc(i);
+                }
+            }
+        }
     }
 
     // An RPC (Remote Procedure Call) is a function a client can ask the server to run.
@@ -38,8 +47,9 @@ public class ArchitectController : NetworkBehaviour
         // This code ONLY runs on the server.
         if (platformId < gameState.platformStates.Count)
         {
+            float audioLength = playerAudio.GetAudioLength(platformId);
             // The server changes the value in the synchronized list.
-            gameState.platformStates[platformId] = !gameState.platformStates[platformId];
+            gameState.platformStates[platformId] = audioLength+bufferTime;
             // Netcode will automatically send this change to all clients!
         }
     }

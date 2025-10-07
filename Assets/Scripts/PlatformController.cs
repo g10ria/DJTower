@@ -13,7 +13,7 @@ public class PlatformController : MonoBehaviour
     void Start()
     {
         // Find the one and only GameState object in the scene.
-        gameState = FindObjectOfType<GameState>();
+        gameState = FindFirstObjectByType<GameState>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         platformCollider = GetComponent<Collider2D>();
 
@@ -29,7 +29,7 @@ public class PlatformController : MonoBehaviour
         if (gameState != null && platformId < gameState.platformStates.Count)
         {
             // Read the boolean value for this platform from the synchronized list.
-            bool isEnabled = gameState.platformStates[platformId];
+            bool isEnabled = gameState.platformStates[platformId]>0;
             
             if (spriteRenderer != null) spriteRenderer.enabled = isEnabled;
             if (platformCollider != null) platformCollider.enabled = isEnabled;
