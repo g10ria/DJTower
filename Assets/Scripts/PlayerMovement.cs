@@ -10,6 +10,9 @@ public class PlayerMovement : NetworkBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
 
+    [SerializeField] private float fallThreshold = -10f;
+    [SerializeField] private Vector3 respawnPosition = new Vector3(0, 2, 0);
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,6 +27,11 @@ public class PlayerMovement : NetworkBehaviour
             return;
         }
         Move();
+
+        if (transform.position.y < fallThreshold)
+        {
+            RespawnPlayer();
+        }
     }
 
     void Move()
@@ -56,6 +64,19 @@ public class PlayerMovement : NetworkBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             isGrounded = false;
+        }
+    }
+
+    private void RespawnPlayer()
+    {
+        transform.position = respawnPosition;
+        Debug.Log($"Player {OwnerClientId} respawned");
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
         }
     }
 }
