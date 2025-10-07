@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 6804519466136763970}
   - component: {fileID: -3541002156602613989}
   - component: {fileID: -3349309143468963383}
-  - component: {fileID: -7526767520189888773}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -172,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 4290492241
+  GlobalObjectIdHash: 3222723009
   InScenePlacedSourceGlobalObjectIdHash: 4290492241
   DeferredDespawnTick: 0
   Ownership: 1
@@ -200,6 +199,8 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   moveSpeed: 5
   jumpForce: 8
+  fallThreshold: -10
+  respawnPosition: {x: -8.19, y: 1.77, z: 0}
 --- !u!114 &-3541002156602613989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,18 +264,3 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
---- !u!114 &-7526767520189888773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5298819911732731975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18e7cffd4a0b1164f849c09d4fb8efc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
-  ShowTopMostFoldoutHeaderGroup: 1
-  fallThreshold: -10
-  respawnPosition: {x: -8.19, y: 1.77, z: 0}
