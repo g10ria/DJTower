@@ -45,6 +45,7 @@ public class RelayManager : MonoBehaviour
     async void CreateRelay()
     {
         Allocation allocation = await RelayService.Instance.CreateAllocationAsync(1);
+
         string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
         codeText.text = "Code: " + joinCode;
 
@@ -72,11 +73,5 @@ public class RelayManager : MonoBehaviour
         hostButton.gameObject.SetActive(false);
         joinButton.gameObject.SetActive(false);
         joinInput.gameObject.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
