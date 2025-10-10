@@ -57,6 +57,7 @@ public class PlayerSpawner : MonoBehaviour
         {
             NetworkManager.Singleton.OnServerStarted -= HandleServerStarted;
             NetworkManager.Singleton.OnClientConnectedCallback -= HandleClientConnected;
+            NetworkManager.Singleton.Shutdown();
         }
     }
 }
