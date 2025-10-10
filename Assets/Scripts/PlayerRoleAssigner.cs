@@ -15,11 +15,12 @@ public class PlayerRoleAssigner : NetworkBehaviour
             // This is the Host (Architect)
             Debug.Log("I am the Architect!");
             GetComponent<ArchitectController>().enabled = true;
-            GetComponent<PlayerMovement>().enabled = false;
-
-            GetComponent<SpriteRenderer>().enabled = false;
-            GetComponent<Collider2D>().enabled = false;
+            GetComponent<PlayerMovement>().enabled = true;
+            GetComponent<SpriteRenderer>().enabled = true;
+            GetComponent<Collider2D>().enabled = true;
         }
+
+
         else
         {
             // This is a connecting Client (Jumper)

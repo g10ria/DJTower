@@ -1,6 +1,7 @@
 using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
+using Settings;
 
 public class GameState : NetworkBehaviour
 {
@@ -17,12 +18,25 @@ public class GameState : NetworkBehaviour
 
     public void Update()
     {
-        for (int i = 0; i < platformStates.Count; i++) {
+        for (int i = 0; i < platformStates.Count; i++)
+        {
             if (platformStates[i] > 0)
             {
                 platformStates[i] = math.max(0, platformStates[i] - Time.deltaTime);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Config.TESTING = true;
+            Debug.Log($"Testing mode: {Config.TESTING}");
+            foreach (var netObj in NetworkManager.Singleton.SpawnManager.SpawnedObjectsList)
+            {
+                netObj.ChangeOwnership(0); // 0 = host’s client ID
+            }
+
+        }
+
     }
 
     // We want the server to set the initial state when it starts.
