@@ -28,8 +28,8 @@ public class PlatformController : MonoBehaviour
         // If the GameState is ready and we have a valid ID...
         if (gameState != null && platformId < gameState.platformStates.Count)
         {
-            // Read the boolean value for this platform from the synchronized list.
-            bool isEnabled = gameState.platformStates[platformId]>0;
+            // If there is time left (trigger) or if it is enabled (toggle)
+            bool isEnabled = gameState.platformStates[platformId] > 0;
             
             if (spriteRenderer != null) spriteRenderer.enabled = isEnabled;
             if (platformCollider != null) platformCollider.enabled = isEnabled;
