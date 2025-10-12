@@ -1,38 +1,32 @@
+using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
 
-public class GameState : NetworkBehaviour
+public class GameState : MonoBehaviour
 {
-    // A NetworkList is a list of values that is automatically synchronized
-    // from the server to all clients. Perfect for our platform states!
-    // We initialize it with a few platforms for testing.
-    public NetworkList<float> platformStates;
+    public List<float> platformStates = new List<float>();
 
     private void Awake()
     {
-        // Initialize the list. This only needs to be done once.
-        platformStates = new NetworkList<float>();
+        for (int i = 0; i < 16; i++)
+                platformStates.Add(0f);
     }
 
     public void Update()
     {
-        for (int i = 0; i < platformStates.Count; i++) {
+        for (int i = 0; i < platformStates.Count; i++)
+        {
             if (platformStates[i] > 0)
             {
                 platformStates[i] = math.max(0, platformStates[i] - Time.deltaTime);
             }
         }
     }
-
-    // We want the server to set the initial state when it starts.
-    public override void OnNetworkSpawn()
+    
+    public void SetPlatformState(int platformId, float time)
     {
-        if (IsServer)
-        {
-            for (int i = 0; i < 16; i++)
-                platformStates.Add(0f);
-                
-        }
+        if (platformId >= 0 && platformId < platformStates.Count)
+            platformStates[platformId] = time;
     }
 }

@@ -44,13 +44,19 @@ public class ArchitectController : NetworkBehaviour
     [ServerRpc]
     private void TogglePlatformServerRpc(int platformId)
     {
-        // This code ONLY runs on the server.
-        if (platformId < gameState.platformStates.Count)
-        {
-            float audioLength = playerAudio.GetAudioLength(platformId);
-            // The server changes the value in the synchronized list.
-            gameState.platformStates[platformId] = audioLength+bufferTime;
-            // Netcode will automatically send this change to all clients!
-        }
+        float audioLength = playerAudio.GetAudioLength(platformId);
+        float totalTime = audioLength + bufferTime;
+
+        // Tell all clients to update their GameState locally
+        UpdatePlatformClientRpc(platformId, totalTime);
+    }
+    
+    [ClientRpc]
+    private void UpdatePlatformClientRpc(int platformId, float totalTime)
+    {
+        if (gameState == null)
+            gameState = FindFirstObjectByType<GameState>();
+
+        gameState.SetPlatformState(platformId, totalTime);
     }
 }
