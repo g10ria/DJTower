@@ -67,6 +67,17 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!IsOwner) return;
+        
+        // Check for checkpoint
+        if (other.CompareTag("Checkpoint"))
+        {
+            SetCheckpoint(other.transform.position);
+        }
+    }
+
     private void RespawnPlayer()
     {
         transform.position = respawnPosition;
@@ -78,5 +89,11 @@ public class PlayerMovement : NetworkBehaviour
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
+    }
+
+    public void SetCheckpoint(Vector3 position)
+    {
+        respawnPosition = position;
+        Debug.Log("Checkpoint saved at: " + position);
     }
 }
