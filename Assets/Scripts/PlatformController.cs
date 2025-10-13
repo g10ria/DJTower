@@ -1,10 +1,13 @@
 using Unity.Netcode;
 using UnityEngine;
+using Enums;
 
 public class PlatformController : MonoBehaviour
 {
     // Assign this in the Inspector for each platform (0, 1, 2, etc.)
     public int platformId;
+    public int platformGroup;
+    public PlatformType type;
 
     private GameState gameState;
     private SpriteRenderer spriteRenderer; // Example: change color

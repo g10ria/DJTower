@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using Enums;
 
 public class ArchitectController : NetworkBehaviour
 {
@@ -15,6 +16,8 @@ public class ArchitectController : NetworkBehaviour
         // Find the GameState once we're in the game.
         gameState = FindFirstObjectByType<GameState>();
         playerAudio = GetComponent<PlayerAudio>();
+
+        playerAudio.StartToggleAudiosServerRpc();
     }
 
     void Update()
@@ -27,14 +30,19 @@ public class ArchitectController : NetworkBehaviour
         KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F,
         KeyCode.Z, KeyCode.X, KeyCode.C, KeyCode.V };
 
-        for (int i = 0; i < keyCodes.Length; i++)
+        for (int groupId = 0; groupId < keyCodes.Length; groupId++)
         {
-            if (Input.GetKeyDown(keyCodes[i]))
+            if (Input.GetKeyDown(keyCodes[groupId]))
             {
-                if (i < gameState.platformStates.Count && gameState.platformStates[i] <= 0)
+                if (groupId >= gameState.platformGroups.Count) continue;
+                for (int platformId = 0; platformId < gameState.platformGroups.Count; platformId++)
                 {
-                    playerAudio.PlaySoundServerRpc(i);
-                    TogglePlatformServerRpc(i);
+                    if (gameState.platformGroups[platformId] != groupId) continue;
+                    if (gameState.platformTypes[groupId] == PlatformType.Toggle 
+                    || gameState.platformTypes[groupId] == PlatformType.Trigger && gameState.platformStates[groupId] <= 0)
+                    {
+                        TogglePlatformServerRpc(platformId);
+                    }   
                 }
             }
         }
@@ -44,13 +52,19 @@ public class ArchitectController : NetworkBehaviour
     [ServerRpc]
     private void TogglePlatformServerRpc(int platformId)
     {
+
         // This code ONLY runs on the server.
-        if (platformId < gameState.platformStates.Count)
+        if (platformId >= gameState.platformStates.Count) return;
+        playerAudio.PlaySoundServerRpc(platformId, gameState.platformTypes[platformId] == PlatformType.Trigger);
+        if (gameState.platformTypes[platformId] == PlatformType.Trigger)
         {
             float audioLength = playerAudio.GetAudioLength(platformId);
             // The server changes the value in the synchronized list.
             gameState.platformStates[platformId] = audioLength+bufferTime;
             // Netcode will automatically send this change to all clients!
+        } else
+        {
+            gameState.platformStates[platformId] = gameState.platformStates[platformId] == 0f? 1f : 0f;
         }
     }
 }

@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using Unity.Mathematics;
-using Unity.Netcode;
+using Unity.Netcode; 
 using UnityEngine;
+using Enums;
 
 // A wrapper for PlatformType enum in order to make it network serializable
 
@@ -25,11 +27,7 @@ public class GameState : NetworkBehaviour
     public NetworkList<PlatformTypeNet> platformTypes;
     public NetworkList<int> platformGroups;
 
-    public enum PlatformType : byte
-    {
-        Toggle,
-        Trigger,
-    }
+    
     public struct PlatformTypeNet : INetworkSerializable, IEquatable<PlatformTypeNet>
 {
     public PlatformType Value;
@@ -75,12 +73,31 @@ public class GameState : NetworkBehaviour
     {
         if (IsServer)
         {
-            for (int i = 0; i < 16; i++)
+            PlatformController[] platforms = FindObjectsByType<PlatformController>(FindObjectsSortMode.None);
+            Array.Sort(platforms, (a, b) => a.platformId.CompareTo(b.platformId));
+
+            foreach (PlatformController platform in platforms)
+            {
                 platformStates.Add(0f);
-            for (int i = 0; i < 16; i++) // need to update
-                platformTypes.Add(PlatformType.Trigger);
-            for (int i = 0; i < 16; i++)
-                platformGroups.Add(0);
+                platformTypes.Add(platform.type);
+                platformGroups.Add(platform.platformGroup);
+            } 
         }
+    }
+
+    public void AssignAudioIds()
+    {
+        // add platform ID to audio ID mappings
+        PlayerAudio playerAudio = FindFirstObjectByType<PlayerAudio>();
+        Dictionary<int, int> platToAudio = new Dictionary<int, int>();
+        int audioId = 0;
+        for (int platformId = 0; platformId < platformTypes.Count; platformId++)
+        {
+            if (platformTypes[platformId] == PlatformType.Toggle)
+            {
+                platToAudio[platformId] = audioId;
+            }
+        }
+        playerAudio.MapToggleAudios(platToAudio);
     }
 }
