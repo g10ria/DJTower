@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
+using Settings;
 
 public class GameState : MonoBehaviour
 {
@@ -22,6 +23,18 @@ public class GameState : MonoBehaviour
                 platformStates[i] = math.max(0, platformStates[i] - Time.deltaTime);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Config.TESTING = true;
+            Debug.Log($"Testing mode: {Config.TESTING}");
+            foreach (var netObj in NetworkManager.Singleton.SpawnManager.SpawnedObjectsList)
+            {
+                netObj.ChangeOwnership(0); // 0 = host’s client ID
+            }
+
+        }
+
     }
     
     public void SetPlatformState(int platformId, float time)
