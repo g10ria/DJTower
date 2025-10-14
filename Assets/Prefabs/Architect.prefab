@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2588309423
+  GlobalObjectIdHash: 4050915318
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -184,20 +184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAudio
   ShowTopMostFoldoutHeaderGroup: 1
-  clips:
-  - {fileID: 8300000, guid: afd2e20aa3f71e141a96267e4d8fbf2c, type: 3}
-  - {fileID: 8300000, guid: 270a3d4e3bca18044a332466b34b1873, type: 3}
-  - {fileID: 8300000, guid: ac60cc33f2ac70e4cb1aacae7bd7fdb7, type: 3}
-  - {fileID: 8300000, guid: 78f7debc7ca190145a3b7ac846e410c9, type: 3}
-  - {fileID: 8300000, guid: aa292b4f7c1461c49a39f5155ac78069, type: 3}
-  - {fileID: 8300000, guid: 4cc0668785877e8478418a74d5db6b01, type: 3}
-  - {fileID: 8300000, guid: 2541537e56cefb941a0be92d6a59abbd, type: 3}
-  - {fileID: 8300000, guid: bcb0b89dcdfd33242b6a177859ec0377, type: 3}
-  - {fileID: 8300000, guid: 0eae501822d21fe40a396204a483ea55, type: 3}
-  - {fileID: 8300000, guid: 1e6c58fdf4ff7884c908a1cc08d0dbdf, type: 3}
-  - {fileID: 8300000, guid: d10acd9bfcf456842a5eb93491faebe2, type: 3}
-  - {fileID: 8300000, guid: 8bd2be161007e2d44bf06acfc32b4f28, type: 3}
-  - {fileID: 8300000, guid: 0d82687d15cbf1e4fb170ff11b72e779, type: 3}
+  triggerClips:
   - {fileID: 8300000, guid: eed4075c70e310745ba84509099ebd40, type: 3}
-  - {fileID: 8300000, guid: 6f38a73f26a8aea4fac60a658b81fdfd, type: 3}
-  - {fileID: 8300000, guid: b42fbebd078faa649b77a64a9603a78f, type: 3}
+  - {fileID: 8300000, guid: 4cc0668785877e8478418a74d5db6b01, type: 3}
+  toggleClips:
+  - {fileID: 8300000, guid: eacade5c242bd4e0db8d0ff9d7e8a6b6, type: 3}
+  - {fileID: 8300000, guid: 2e82ca7b47ede46d486139d8d9c9059d, type: 3}

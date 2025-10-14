@@ -56,6 +56,10 @@ public class PlayerMovement : NetworkBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             isGrounded = true;
+        } else if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            Debug.Log("collided with obstacle");
+            RespawnPlayer();
         }
     }
 
