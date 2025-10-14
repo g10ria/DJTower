@@ -8,7 +8,7 @@ using Enums;
 // A wrapper for PlatformType enum in order to make it network serializable
 
 
-public class GameState : NetworkBehaviour
+public class GameState : MonoBehaviour
 {
     // A NetworkList is a list of values that is automatically synchronized
     // from the server to all clients. Perfect for our platform states!
@@ -20,12 +20,12 @@ public class GameState : NetworkBehaviour
     /// - If a `Toggle` type: 0.0 if the platform is disabled, 1.0 if enabled
     /// - If a `Trigger` type: the time remaining for the platform to be enabled
     /// </summary>
-    public NetworkList<float> platformStates;
+    public List<float> platformStates;
     /// <summary>
     /// A parallel list to `platformStates` that stores the type of platform
     /// </summary>
-    public NetworkList<PlatformTypeNet> platformTypes;
-    public NetworkList<int> platformGroups;
+    public List<PlatformTypeNet> platformTypes;
+    public List<int> platformGroups;
 
     
     public struct PlatformTypeNet : INetworkSerializable, IEquatable<PlatformTypeNet>
@@ -53,11 +53,20 @@ public class GameState : NetworkBehaviour
     private void Awake()
     {
         // Initialize the list. This only needs to be done once.
-        platformStates = new NetworkList<float>();
-        platformTypes = new NetworkList<PlatformTypeNet>();
-        platformGroups = new NetworkList<int>();
-    }
+        platformStates = new List<float>();
+        platformTypes = new List<PlatformTypeNet>();
+        platformGroups = new List<int>();
 
+        PlatformController[] platforms = FindObjectsByType<PlatformController>(FindObjectsSortMode.None);
+        Array.Sort(platforms, (a, b) => a.platformId.CompareTo(b.platformId));
+
+        foreach (PlatformController platform in platforms)
+        {
+            platformStates.Add(0f);
+            platformTypes.Add(platform.type);
+            platformGroups.Add(platform.platformGroup);
+        } 
+    }
     public void Update()
     {
         for (int i = 0; i < platformStates.Count; i++) {
@@ -68,21 +77,11 @@ public class GameState : NetworkBehaviour
         }
     }
 
-    // We want the server to set the initial state when it starts.
-    public override void OnNetworkSpawn()
+    public void SetPlatformState(int platformId, float value)
     {
-        if (IsServer)
-        {
-            PlatformController[] platforms = FindObjectsByType<PlatformController>(FindObjectsSortMode.None);
-            Array.Sort(platforms, (a, b) => a.platformId.CompareTo(b.platformId));
-
-            foreach (PlatformController platform in platforms)
-            {
-                platformStates.Add(0f);
-                platformTypes.Add(platform.type);
-                platformGroups.Add(platform.platformGroup);
-            } 
-        }
+        
+        if (platformId >= 0 && platformId < platformStates.Count)
+            platformStates[platformId] = value;
     }
 
     public void AssignAudioIds()

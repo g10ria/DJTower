@@ -55,16 +55,28 @@ public class ArchitectController : NetworkBehaviour
 
         // This code ONLY runs on the server.
         if (platformId >= gameState.platformStates.Count) return;
+        
         playerAudio.PlaySoundServerRpc(platformId, gameState.platformTypes[platformId] == PlatformType.Trigger);
+
+        float audioLength = playerAudio.GetAudioLength(platformId);
+        float totalTime = audioLength + bufferTime;
+
         if (gameState.platformTypes[platformId] == PlatformType.Trigger)
         {
-            float audioLength = playerAudio.GetAudioLength(platformId);
-            // The server changes the value in the synchronized list.
-            gameState.platformStates[platformId] = audioLength+bufferTime;
+            UpdatePlatformClientRpc(platformId, totalTime);
             // Netcode will automatically send this change to all clients!
         } else
         {
-            gameState.platformStates[platformId] = gameState.platformStates[platformId] == 0f? 1f : 0f;
+            UpdatePlatformClientRpc(platformId, gameState.platformStates[platformId] == 0f? 1f : 0f);
         }
+    }
+    
+    [ClientRpc]
+    private void UpdatePlatformClientRpc(int platformId, float value)
+    {
+        if (gameState == null)
+            gameState = FindFirstObjectByType<GameState>();
+
+        gameState.SetPlatformState(platformId, value);
     }
 }
