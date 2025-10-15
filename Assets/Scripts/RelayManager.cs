@@ -22,7 +22,7 @@ public class RelayManager : MonoBehaviour
     public GameObject Player;
     public GameObject Architect;
 
-    public string[] levels = {"DaftPunkLevel, Snoc"};
+    public string[] levels = {"Snoc"};
 
     private void Awake()
     {
@@ -124,17 +124,6 @@ public class RelayManager : MonoBehaviour
         playerInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
     }
 
-    // public void LoadLevel(int levelIndex)
-    // {
-    //     Debug.Log("attempting to load level index " + levelIndex);
-    //     if (NetworkManager.Singleton.IsHost)
-    //     {
-    //         Debug.Log("is host, loading level " + levels[levelIndex]);
-    //         NetworkManager.Singleton.SceneManager.LoadScene(levels[levelIndex], LoadSceneMode.Single);
-    //         Debug.Log("loaded level " + levels[levelIndex]);
-    //     }
-    //     // TODO: check levelIndex within bounds
-    // }
     public void LoadLevel(int levelIndex)
     {
         if (levelIndex < 0 || levelIndex >= levels.Length)
