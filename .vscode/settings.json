@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "Setup Guide In-Editor Tutorial.sln"
+    "dotnet.defaultSolution": "DJTower.sln"
 }
