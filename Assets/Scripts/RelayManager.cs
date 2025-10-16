@@ -32,7 +32,7 @@ public class RelayManager : MonoBehaviour
 
     private UnityTransport transport;
     // This string will be "wss" for WebGL builds and "dtls" for all other platforms
-    private string connectionType = "dtls";
+    private string connectionType = "wss";
     async void Start()
     {
         transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
