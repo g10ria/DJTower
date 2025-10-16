@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 using Enums;
+using UnityEngine.SceneManagement;
 
 public class ArchitectController : NetworkBehaviour
 {
@@ -13,11 +14,32 @@ public class ArchitectController : NetworkBehaviour
         // We only want the player who owns this object to be able to control it.
         if (!IsOwner) return;
 
-        // Find the GameState once we're in the game.
+        NetworkManager.SceneManager.OnLoadComplete += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(ulong clientId, string sceneName, LoadSceneMode mode)
+    {
+        if (!IsOwner) return;
+
+        Player1DJInterface DJInterface = FindFirstObjectByType<Player1DJInterface>();
+        if (DJInterface != null)
+        {
+            DJInterface.Show();
+        }
+        else
+        {
+            Debug.LogWarning("Player1DJInterface not found after scene load.");
+        }
+
         gameState = FindFirstObjectByType<GameState>();
         playerAudio = GetComponent<PlayerAudio>();
 
         playerAudio.StartToggleAudiosServerRpc();
+        NetworkManager.SceneManager.OnLoadComplete -= OnSceneLoaded;
+
+        Debug.Log("set up architect vars for loaded scene");
+
+        RelayManager.Instance.SpawnPlayer();
     }
 
     void Update()
