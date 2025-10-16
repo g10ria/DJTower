@@ -272,6 +272,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &135492620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 135492622}
+  - component: {fileID: 135492621}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &135492621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135492620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73585fdefd088a740b6b5eb6a860c2a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioList
+  triggerClips: []
+  toggleClips:
+  - {fileID: 8300000, guid: eacade5c242bd4e0db8d0ff9d7e8a6b6, type: 3}
+  - {fileID: 8300000, guid: 2e82ca7b47ede46d486139d8d9c9059d, type: 3}
+--- !u!4 &135492622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135492620}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1033.1266, y: 632.8226, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &208378890
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +938,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29bc35557a702ca4c9b182a6643f704b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameState
-  ShowTopMostFoldoutHeaderGroup: 1
+  platformStates: []
+  platformGroups: 
 --- !u!4 &647152715
 Transform:
   m_ObjectHideFlags: 0
@@ -2031,3 +2080,4 @@ SceneRoots:
   - {fileID: 2073376072}
   - {fileID: 2009538220}
   - {fileID: 322516184}
+  - {fileID: 135492622}

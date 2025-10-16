@@ -22,7 +22,7 @@ public class RelayManager : MonoBehaviour
     public GameObject Player;
     public GameObject Architect;
 
-    public string[] levels = {"Snoc"};
+    public string[] levels = {"Snoc", "DaftPunkLevel"};
 
     private void Awake()
     {

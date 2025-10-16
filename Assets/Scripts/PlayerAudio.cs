@@ -7,9 +7,9 @@ using UnityEngine;
 public class PlayerAudio : NetworkBehaviour
 {
     // Assign your sound effect in the Inspector.
-    [SerializeField] private AudioClip[] triggerClips;
+    private AudioClip[] triggerClips;
     private Dictionary<int, int> togglePlatIdtoClipId; // toggle platform ID to toggle audio clip ID
-    [SerializeField] private AudioClip[] toggleClips;
+    private AudioClip[] toggleClips;
     private float currentTime;
 
     private AudioSource triggerSource;
@@ -17,6 +17,10 @@ public class PlayerAudio : NetworkBehaviour
 
     private void Awake()
     {
+
+        triggerClips = FindAnyObjectByType<AudioList>().triggerClips;
+        toggleClips = FindAnyObjectByType<AudioList>().toggleClips;
+
         // Get the AudioSource component attached to this GameObject.
         triggerSource = GetComponent<AudioSource>();
         FindFirstObjectByType<GameState>().AssignAudioIds();
