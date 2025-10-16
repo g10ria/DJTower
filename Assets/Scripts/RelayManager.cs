@@ -97,11 +97,21 @@ public class RelayManager : MonoBehaviour
     // TODO: check for failures. for now, returning true all the time
     public async Task<bool> JoinRelay(string joinCode)
     {
-        JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
-        var relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, connectionType);
+        Debug.Log($"Attempting to join Relay with code: {joinCode}");
 
-        NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
-        NetworkManager.Singleton.StartClient();
+        try
+        {
+            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
+            var relayServerData = AllocationUtils.ToRelayServerData(joinAllocation, connectionType);
+            
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+            NetworkManager.Singleton.StartClient();
+        }
+        catch (RelayServiceException e)
+        {
+            Debug.LogError($"Relay service error: {e.Message}");
+            return false;
+        }
 
         return true;
     }
