@@ -302,6 +302,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 1
+  platformGroup: 1
+  type: 1
 --- !u!61 &87560925
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2105,6 +2107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 0
+  platformGroup: 0
+  type: 1
 --- !u!1 &443905696
 GameObject:
   m_ObjectHideFlags: 0
@@ -2362,6 +2366,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 537176609}
   m_CullTransparentMesh: 1
+--- !u!1 &539589357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 539589359}
+  - component: {fileID: 539589358}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &539589358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539589357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73585fdefd088a740b6b5eb6a860c2a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioList
+  triggerClips:
+  - {fileID: 8300000, guid: afd2e20aa3f71e141a96267e4d8fbf2c, type: 3}
+  - {fileID: 8300000, guid: 270a3d4e3bca18044a332466b34b1873, type: 3}
+  - {fileID: 8300000, guid: ac60cc33f2ac70e4cb1aacae7bd7fdb7, type: 3}
+  - {fileID: 8300000, guid: 78f7debc7ca190145a3b7ac846e410c9, type: 3}
+  - {fileID: 8300000, guid: aa292b4f7c1461c49a39f5155ac78069, type: 3}
+  - {fileID: 8300000, guid: 4cc0668785877e8478418a74d5db6b01, type: 3}
+  - {fileID: 8300000, guid: 2541537e56cefb941a0be92d6a59abbd, type: 3}
+  - {fileID: 8300000, guid: bcb0b89dcdfd33242b6a177859ec0377, type: 3}
+  - {fileID: 8300000, guid: 0eae501822d21fe40a396204a483ea55, type: 3}
+  - {fileID: 8300000, guid: 1e6c58fdf4ff7884c908a1cc08d0dbdf, type: 3}
+  - {fileID: 8300000, guid: d10acd9bfcf456842a5eb93491faebe2, type: 3}
+  - {fileID: 8300000, guid: 8bd2be161007e2d44bf06acfc32b4f28, type: 3}
+  - {fileID: 8300000, guid: 0d82687d15cbf1e4fb170ff11b72e779, type: 3}
+  - {fileID: 8300000, guid: eed4075c70e310745ba84509099ebd40, type: 3}
+  - {fileID: 8300000, guid: 6f38a73f26a8aea4fac60a658b81fdfd, type: 3}
+  - {fileID: 8300000, guid: b42fbebd078faa649b77a64a9603a78f, type: 3}
+  toggleClips: []
+--- !u!4 &539589359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539589357}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1032.1631, y: 633.31476, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &556496716
 GameObject:
   m_ObjectHideFlags: 0
@@ -2802,6 +2868,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 8
+  platformGroup: 8
+  type: 1
 --- !u!61 &618491952
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3072,6 +3140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameState
   platformStates: []
+  platformGroups: 
 --- !u!4 &647152715
 Transform:
   m_ObjectHideFlags: 0
@@ -3134,6 +3203,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 3
+  platformGroup: 3
+  type: 1
 --- !u!61 &653090010
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3285,6 +3356,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 6
+  platformGroup: 6
+  type: 1
 --- !u!61 &688297618
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4465,6 +4538,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 4
+  platformGroup: 4
+  type: 1
 --- !u!61 &913000273
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4773,6 +4848,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 2
+  platformGroup: 2
+  type: 1
 --- !u!61 &1016800164
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5060,6 +5137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 15
+  platformGroup: 15
+  type: 1
 --- !u!61 &1090197536
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5211,6 +5290,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 12
+  platformGroup: 12
+  type: 1
 --- !u!61 &1118184713
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5362,6 +5443,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 13
+  platformGroup: 13
+  type: 1
 --- !u!61 &1133244978
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5513,6 +5596,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 10
+  platformGroup: 10
+  type: 1
 --- !u!61 &1260812318
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6119,6 +6204,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 14
+  platformGroup: 14
+  type: 1
 --- !u!61 &1355300694
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6270,6 +6357,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 7
+  platformGroup: 7
+  type: 1
 --- !u!61 &1360579098
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6799,6 +6888,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 9
+  platformGroup: 9
+  type: 1
 --- !u!61 &1461776861
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7207,6 +7298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 11
+  platformGroup: 11
+  type: 1
 --- !u!61 &1518724802
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8316,6 +8409,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlatformController
   platformId: 5
+  platformGroup: 5
+  type: 1
 --- !u!61 &2037914711
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8825,3 +8920,4 @@ SceneRoots:
   - {fileID: 1644504823}
   - {fileID: 1768644249}
   - {fileID: 1303449084}
+  - {fileID: 539589359}

@@ -9,6 +9,9 @@ public class ArchitectController : NetworkBehaviour
     private GameState gameState;
     private PlayerAudio playerAudio;
 
+    private float lastInputTime = 0f;
+    private float inputCooldown = 0.15f; // Minimum time between inputs to prevent spamming
+
     public override void OnNetworkSpawn()
     {
         // We only want the player who owns this object to be able to control it.
@@ -56,6 +59,8 @@ public class ArchitectController : NetworkBehaviour
         {
             if (Input.GetKeyDown(keyCodes[groupId]))
             {
+                if (Time.time - lastInputTime < inputCooldown) return; // Ignore input if within cooldown period
+                lastInputTime = Time.time;
                 if (groupId >= gameState.platformGroups.Count) continue;
                 for (int platformId = 0; platformId < gameState.platformGroups.Count; platformId++)
                 {
